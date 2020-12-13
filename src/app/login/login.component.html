@@ -1,0 +1,46 @@
+<title>Login</title>
+<br><br><br><br><br>
+<div align = "center">
+    <a routerLink = "/home">
+    <img src = "../../assets/images/saviors.png"></a><br><br>
+    <b>
+        <span style = "color: red;">
+            {{verifInfo}}
+        </span>
+    </b>
+<div class="container">
+    <div class="form-group">
+        <h1>Login</h1>
+    </div>
+    <form [formGroup] = "signInForm" (ngSubmit) = "signIn()">
+        <div class="form-group">
+            <label>Email</label><br>
+            <input type = "text" class = "form-control" formControlName = "emailField">
+        </div>
+        <div class="form-group">
+            <label>Password</label><br>
+            <input type = "password" class = "form-control" formControlName = "passField">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" [disabled]="!signInForm.valid">Sign in</button><br>
+            <span style = "color: #5AAAFF;">Don't have an account ? 
+                <u><a routerLink = "/signup" routerLinkActive = "true">Sign up</a></u>
+            </span>
+        </div>
+    </form>
+</div>
+<div class="errors">
+    <span *ngIf = "signInForm.get('emailField').touched 
+            && signInForm.get('emailField').hasError('required')">
+                  Email is Required !
+    </span>
+    <span *ngIf = "signInForm.get('emailField').touched 
+            && signInForm.get('emailField').hasError('email')">
+                  Enter a Valid Email !
+    </span>
+    <span *ngIf = "signInForm.get('passField').touched 
+    && signInForm.get('passField').hasError('required')">
+          Password is Required !
+    </span>
+</div>
+</div>

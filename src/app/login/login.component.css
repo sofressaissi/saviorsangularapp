@@ -1,0 +1,15 @@
+input {
+    width: 250px;
+}
+.container {
+    background-color:white;
+    width: 350px;
+    height: 310px;
+    border-radius: 5px;
+}
+input.ng-touched.ng-invalid {
+    border: 1px solid red;
+}
+.errors {
+    color: red;
+}

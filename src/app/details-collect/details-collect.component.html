@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Collect Details</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Spa Care Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+	Smart phone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script src="./utilities/js/jquery-1.11.1.min.js"></script> 
+</head>
+<div class="container" align = "center">
+          <div class="card" style="width: 18rem; height: 25rem;">
+            <img [src]="urlImg" style = "width: 18rem; height: 7rem;" class="card-img-top">
+               <div class="card-body">
+                 <p style = "color: rgb(23, 105, 199);"><b>Collect Name: {{collectName}}</b></p>
+                 <p class="card-text"><b>Description: {{descCollect}}</b></p>
+                 <p class="card-text"><b>Requested: {{requestedMoney}}</b></p>
+                 <p class="card-text"><b>Collected: {{collectedMoney}}</b></p>
+                 <p class="card-text"><b>Category: {{categoryC}}</b></p>
+                 <p class="card-text"><b>Added by: {{addedBy}}</b></p>
+                 <div class="nav-item">
+                     <div *ngIf = "roleToManageButton != 1">
+                     <form [formGroup] = "updateColForm">
+                         <div class="form-group">
+                     <input type = "number" class = "form-control" placeholder = "Donate (min: 50 Dinars)" 
+                     formControlName = "donateMoney"
+                     style = "height: 30px; width: 250px;">
+                         </div>
+                     <button 
+                     (click)="updateCollect()"class="btn btn-primary" [disabled]="roleToManageButton == 1 || updateColForm.invalid">Donate</button>
+                     </form>
+                    </div>
+                     <div class="errors">
+                        <span *ngIf = "updateColForm.get('donateMoney').touched 
+                                && updateColForm.get('donateMoney').hasError('required')">
+                                      Donation Field is Required !
+                        </span>
+                        <span *ngIf = "updateColForm.get('donateMoney').touched 
+                                && updateColForm.get('donateMoney').hasError('min')">
+                                      You must at least 50 Dinars !
+                        </span>
+                     </div>
+                 </div>
+               </div>
+          </div>
+  </div>
+</html>

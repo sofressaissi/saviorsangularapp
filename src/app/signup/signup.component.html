@@ -1,0 +1,80 @@
+<title>Sign Up</title>
+<br>
+<div align = "center">
+    <a routerLink = "/home">
+    <img src = "../../assets/images/saviors.png"></a><br><br>
+    <b>
+        <span style = "color: red;">
+           {{verifInfo}}
+        </span>
+    </b>
+<div class="container">
+    <div class="form-group">
+        <h1>Sign Up</h1>
+    </div>
+    <form [formGroup] = "signUpForm" (ngSubmit) = "signUp()">
+        <div class="form-group">
+            <label>Username</label><br>
+            <input type = "text" class = "form-control" formControlName = "usernameField">
+        </div>
+        <div class="form-group">
+            <label>Email</label><br>
+            <input type = "text" class = "form-control" formControlName = "emailField">
+        </div>
+        <div class="form-group">
+            <label>Password</label><br>
+            <input type = "password" class = "form-control" formControlName = "passField">
+        </div>
+        <div class="form-group">
+            <label>Confirm Password</label><br>
+            <input type = "password" class = "form-control" formControlName = "confirmPassField">
+        </div>
+        <div class="form-group">
+            <label>Role</label><br>
+            <select formControlName = "roleField">
+                <option *ngFor = "let role of roles">{{role}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" [disabled]="!signUpForm.valid">Sign up</button><br>
+            <span style = "color: #5AAAFF;">Already have an account ? 
+                <u><a routerLink = "/login" routerLinkActive = "true">Sign in</a></u>
+            </span>
+        </div>
+    </form>
+</div>
+<div class="errors">
+    <span *ngIf = "signUpForm.get('usernameField').touched 
+            && signUpForm.get('usernameField').hasError('required')">
+                  Username is Required !
+    </span>
+    <span *ngIf = "signUpForm.get('usernameField').touched 
+            && signUpForm.get('usernameField').hasError('minlength')">
+                  Username must at least 6 characters !
+    </span>
+    <span *ngIf = "signUpForm.get('emailField').touched 
+            && signUpForm.get('emailField').hasError('required')">
+                  Email is Required !
+    </span>
+    <span *ngIf = "signUpForm.get('emailField').touched 
+            && signUpForm.get('emailField').hasError('email')">
+                  Enter a Valid Email !
+    </span>
+    <span *ngIf = "signUpForm.get('passField').touched 
+    && signUpForm.get('passField').hasError('required')">
+          Password is Required !
+    </span>
+    <span *ngIf = "signUpForm.get('passField').touched 
+    && signUpForm.get('passField').hasError('minlength')">
+          Password must at least have 6 characters !
+    </span>
+    <span *ngIf = "signUpForm.get('confirmPassField').touched 
+    && signUpForm.get('confirmPassField').hasError('required')">
+          Confirm Password is Required !
+    </span>
+    <span *ngIf = "signUpForm.get('confirmPassField').touched 
+    && signUpForm.get('confirmPassField').hasError('confirmedValidator')">
+          Password and Confirm Password don't match !
+    </span>
+</div>
+</div>

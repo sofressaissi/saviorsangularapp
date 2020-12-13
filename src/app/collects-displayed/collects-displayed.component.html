@@ -1,0 +1,50 @@
+<div *ngIf = "urlIMG == '' && nomCollect == ''">
+<div align = "center">
+<input type = "text" #myInput [(ngModel)]="collectNameToSearch"
+                                    placeholder="Search by Collect Name" (input) = "searchByCollectName()"
+                                    style = "border-radius: 4px;">
+</div><br>
+<div class="container" align = "center">
+    <div class="body">
+      <div class="row">
+        <div class="col col-12 col-md-6 col-lg-3" *ngFor="let collect of dataCollectGot | 
+        paginate: { id: 'listing_pagination', 
+        itemsPerPage: 4,
+        currentPage: page,
+        totalItems: totalRecords }">
+          <div class="card" style="width: 18rem; height: 25rem;" *ngIf = "collect.id !== 1">
+            <img [src]="collect.urlImage" style = "width: 18rem; height: 8rem;" class="card-img-top">
+               <div class="card-body">
+                 <p style = "color: rgb(23, 105, 199);"><b>{{collect.nomC}}</b></p>
+                 <p class="card-text"><b>Requested: {{collect.fond}} Dinars</b></p>
+                 <p class="card-text"><b>Collected: {{collect.fontAtteint}} Dinars</b></p>
+                 <p class="card-text"><b>Category: {{collect.categoryCollect}}</b></p>
+                 <div class="nav-item">
+                   <!--Donate here-->
+                   <a>
+                     <button class="btn btn-primary" [disabled] = "collect.fontAtteint >= collect.fond"
+                     (click) = "showDetails(collect.id, collect.nomC, collect.descriptionC, collect.fond, collect.fontAtteint, collect.categoryCollect, collect.urlImage, collect.emailOfWhoAdded)">Details</button>
+                     <br><span *ngIf = "collect.fontAtteint > collect.fond" style = "color: red;">
+                        <strong>This collect is expired !</strong>
+                     </span> 
+                  </a> 
+                </div>
+               </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf = "dataCollectGot.length > 0">
+      <pagination-controls id = "listing_pagination" 
+                       maxSize = "5" directionLinks = "true"
+                       (pageChange) = "page = $event">
+      </pagination-controls>
+      </div> 
+    </div>
+  </div>
+</div>
+  <div *ngIf = "urlIMG != '' && nomCollect != ''">
+  <app-details-collect [urlImg] = "urlIMG" [collectName] = "nomCollect" [requestedMoney] = "fondCollect" 
+  [collectedMoney] = "howMany" [categoryC] = "categoryC" [descCollect] = "desCollect"
+  [addedBy] = "addedBy" [idCol] = "idC"></app-details-collect>
+  </div>
+  
